@@ -1,0 +1,34 @@
+<div class="request">
+  <div class="requestInfo">
+    <h2>Informace o Vaší půjčce</h2>
+    <h5>Zde se nachází informace o Vaší žádosti o půjčku, kterou právě zpracováváme. Zadali jste při žádosti špatnou částku
+      nebo délku splátky? Nevadí! S naší aplikací můžete jednoduše upravit svá data. Byla-li Vaše žádost zamítnuta,
+      rovněž můžete použít tlačítko pro úpravu a zkusit to znovu! V případě, že jste chybně zadali své osobní údaje,
+      neváhejte kontaktovat naše pracovníky, kteří Vám s ochotou pomohou!</h5>
+  </div>
+  <div class="requestBody">
+    <app-request-detail *ngIf="loanDetail"></app-request-detail>
+    <div class="requestEdit">
+      <div class="requestStatus" *ngIf="loanDetail">
+        <h3>Vaše žádost je ve stavu:</h3>
+        <h5>{{loanStatus}}</h5>
+      </div>
+
+      <div class="buttonHolder">
+        <div [ngClass]="!editMode ? 'requestEditButton' : 'requestEditButtonDisabled'"
+            *ngIf="loanDetail && loanStatus !== 'Schváleno!'"
+            (click)="switchEditMode()"
+        >Editovat žádost!</div>
+
+        <div class="requestEditButton" *ngIf="editMode" (click)="submitEdit()">Změnit!</div>
+      </div>
+
+      <div class="errMess"> {{errMess}} </div>
+<div class="requestBankInfo">
+      <h4>Ohledně problémů a podrobnějších informací kontaktujte našeho bankovního poradce.</h4>
+      <h5>Tel.: 654 987 234</h5>
+      <h5>E-mail: bankovni.poradce@coopbank.eu</h5>
+    </div>
+    </div>
+  </div>
+</div>

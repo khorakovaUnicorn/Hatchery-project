@@ -1,0 +1,33 @@
+form {
+  position: absolute;
+  margin: 7em auto 0 auto;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+button {
+  font-weight: bold;
+  background: #00843d;
+  border: 1px solid #00843d;
+  color: white;
+  padding: .5em .5em;
+  transition-duration: 500ms;
+  font-size: 1em;
+}
+
+label {
+  color: #00843d;
+}
+
+.field {
+  margin: 20px 5px;
+}
+
+.error {
+  color: red;
+}
+
+input {
+  border-width: 1px;
+}

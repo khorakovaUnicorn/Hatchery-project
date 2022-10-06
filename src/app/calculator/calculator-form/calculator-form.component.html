@@ -1,0 +1,32 @@
+<div class="main-form">
+  <h1 class="main-form-header">Žádost o online půjčku</h1>
+  <div>
+    <form [formGroup]="loanForm">
+<!--      <div class="main-form-checkbox-area">-->
+<!--        <div *ngFor="let applicantType of applicantTypes">-->
+<!--          <label>-->
+<!--            <input-->
+<!--              class="main-form-checkbox"-->
+<!--              type="radio"-->
+<!--              formControlName="applicantType"-->
+<!--              [value]="applicantType.key">-->
+<!--            {{ applicantType.czValue }}-->
+<!--          </label>-->
+<!--        </div>-->
+<!--      </div>-->
+        <div class="main-form-select">
+          <select formControlName="applicantType">
+          <option *ngFor="let applicantType of applicantTypes" [value]="applicantType.key">{{ applicantType.czValue }}</option>
+          </select>
+        </div>
+    </form>
+    <div [ngSwitch]="loanForm.get('applicantType').value">
+      <app-calculator-form-individual *ngSwitchCase="ApplicantType.INDIVIDUAL"></app-calculator-form-individual>
+      <app-calculator-form-osvc *ngSwitchCase="ApplicantType.OSVC"></app-calculator-form-osvc>
+      <app-calculator-form-legal-entity *ngSwitchCase="ApplicantType.LEGAL_ENTITY"></app-calculator-form-legal-entity>
+    </div>
+  </div>
+  <div class="errMess">
+      {{errMess}}
+  </div>
+</div>

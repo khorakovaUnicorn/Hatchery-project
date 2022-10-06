@@ -1,0 +1,84 @@
+<div class="whoIsLoggedPannel">
+  <div class="whoIsLogged">
+    <p>{{ loggedUser ? loggedUser.name : "" }}</p>
+    <p>
+      <span *ngIf="loggedUser.roles.includes('ADMIN')">Bankovní poradce</span>
+      <span *ngIf="loggedUser.roles.length > 1">, </span>
+      <span *ngIf="loggedUser.roles.includes('SUPERVIZOR')">Admin</span>
+    </p>
+  </div>
+</div>
+
+<div class="admin">
+  <div class="tableSection">
+    <table class="filters">
+      <tr>
+        <th>Typ osoby</th>
+        <th>Stav žádosti</th>
+      </tr>
+      <tr>
+        <td>
+          <select [(ngModel)]="subjectSelection" (ngModelChange)="onFiltering()">
+            <option value="all">Vše</option>
+            <option value="natural">Fyzická</option>
+            <option value="OSVC">OSVČ</option>
+            <option value="legal">Právnická</option>
+          </select>
+        </td>
+        <td>
+          <select [(ngModel)]="stateSelection" (ngModelChange)="onFiltering()">
+            <option value="all">Vše</option>
+            <option value="pending">Čekající</option>
+            <option value="cancelled">Zamítnuté</option>
+            <option value="approved">Schválené</option>
+          </select>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+  <br>
+
+  <div class="error" *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <div class="tableSection">
+    <table class="table">
+      <tr>
+        <th>Typ osoby</th>
+        <th>Příjmení <select [(ngModel)]="sortedAlphabet" (ngModelChange)="onAlphabetSorting($event)">
+          <option value="">Seřadit</option>
+          <option value="AZ">A-Z</option>
+          <option value="ZA">Z-A</option>
+        </select></th>
+        <th>Výše úvěru <select [(ngModel)]="sortedLoan" (ngModelChange)="onLoanSorting($event)">
+          <option value="">Seřadit</option>
+          <option value="max">MAX</option>
+          <option value="min">MIN</option>
+        </select></th>
+        <th>Stav žádosti</th>
+        <th *ngIf="displayedRequests === undefined || displayedRequests[0]"></th>
+      </tr>
+      <tr *ngFor="let request of displayedRequests">
+        <td *ngIf="request.applicantType === 'INDIVIDUAL'">Fyzická</td>
+        <td *ngIf="request.applicantType === 'OSVC'">OSVČ</td>
+        <td *ngIf="request.applicantType === 'LEGAL_ENTITY'">Právnická</td>
+        <td>{{request.surname}}</td>
+        <td>{{request.amount | spacing}} Kč</td>
+        <td *ngIf="request.status === 'PENDING'">Čekající</td>
+        <td *ngIf="request.status === 'APPROVED'">Schváleno</td>
+        <td *ngIf="request.status === 'CANCELLED'">Zamítnuto</td>
+        <td>
+          <button class="approve" *ngIf="request.status === 'PENDING'" (click)="onApprove(request)">Schválit</button>
+          <button class="reject" *ngIf="request.status === 'PENDING'" (click)="onReject(request)">Zamítnout</button>
+          <button (click)="openDetail(request.id)">Detail</button>
+        </td>
+      </tr>
+    </table>
+    <p *ngIf="displayedRequests === undefined || !displayedRequests[0]">Žádná data k zobrazení</p>
+  </div>
+</div>
+
+
+

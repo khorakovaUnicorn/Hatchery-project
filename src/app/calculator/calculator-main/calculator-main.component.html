@@ -1,0 +1,90 @@
+<div class="calculatorMain">
+  <form id="calculatorMainForm" #formGroup [formGroup]="calculateForm">
+    <div class="calculatorMainFormItem">
+      <div class="rangeHold">
+        <label for="amount">Částka: </label>
+        <input
+          type="range"
+          min="5000"
+          max="1200000"
+          id="amount"
+          step="1000"
+          name="amount"
+          formControlName="amount"
+          value="{{amountValue}}"
+          (input)="amtChange($event)"
+        >
+      </div>
+      <div class="manualChangeHolder">
+        <input
+          type="text"
+          class="valueChangeHolder"
+          value="{{amountValue}}"
+          (click)="selectVal($event)"
+        >
+        <span> Kč</span>
+      </div>
+    </div>
+
+    <div class="calculatorMainFormItem">
+      <div class="rangeHold">
+        <label for="duration">Doba splácení: </label>
+        <input
+          type="range"
+          min="6"
+          max="60"
+          id="duration"
+          step="1"
+          name="duration"
+          formControlName="duration"
+          (input)="durChange($event)"
+        >
+      </div>
+      <div class="calculatorMainFormRgVal">{{durationMessage}}</div>
+    </div>
+
+    <div class="resultHolder" *ngIf="hasBeenTouched">
+      <div class="calculatorMainFormResult">
+        <div class="calcMainFormResItem">
+          <h4>Měsíční splátka: </h4>
+          <div class="calculatorMainFormResVal">{{monthlyPayment | spacing}} Kč</div>
+        </div>
+
+        <div class="horizontalSeparator"></div>
+
+        <div class="calcMainFormResItem">
+          <h4>Úroková sazba: </h4>
+          <div class="calculatorMainFormResVal">{{yearlyInterest}},0 % p.a.</div>
+        </div>
+
+        <div class="horizontalSeparator"></div>
+
+        <div class="calcMainFormResItem">
+          <h4>RPSN: </h4>
+          <div class="calculatorMainFormResVal">{{RPSN}},0 %</div>
+        </div>
+
+        <div class="horizontalSeparator" *ngIf="fixedFee !== 0 || fixedFee !== undefined"></div>
+
+        <div class="calcMainFormResItem" *ngIf="fixedFee !== 0 || fixedFee !== undefined">
+          <h4>Fixní poplatek: </h4>
+          <div class="calculatorMainFormResVal">{{fixedFee | spacing}} Kč</div>
+        </div>
+      </div>
+      <div class="calcMainFormSum">
+        <h4>Celková splatná částka: </h4>
+        <div class="calcMainFormSumRes">{{overallAmount | spacing}} Kč</div>
+      </div>
+    </div>
+
+    <input
+      type="button"
+      value="Chci půjčku!"
+      class="calculatorMainFormSubmit"
+      [disabled]="!hasBeenTouched"
+      (click)="onSubmit()"
+    >
+
+    <div class="errMess"> {{errMess}} </div>
+  </form>
+</div>

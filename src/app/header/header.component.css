@@ -1,0 +1,52 @@
+nav {
+  display: flex;
+  font-size: 1.125rem;
+  align-items: baseline;
+  font-weight: bold;
+  -webkit-box-shadow: 1px 3px 8px -2px rgba(0,0,0,0.77);
+  -moz-box-shadow: 1px 3px 8px -2px rgba(0,0,0,0.77);
+  box-shadow: 1px 3px 8px -2px rgba(0,0,0,0.77);
+  position: fixed;
+  top: 0;
+  z-index: 3;
+  background: white;
+  width: 100%;
+}
+
+#login, #admin {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.nav_right {
+  padding-top: 20px;
+  margin-left: auto;
+}
+
+.nav_left {
+  padding-top: 20px;
+}
+
+
+.nav {
+  cursor: pointer;
+  padding-bottom: 15px;
+  margin-right: 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+.nav:hover {
+  color: #00843d;
+  border-bottom: #00843d solid;
+}
+
+.logo {
+  font-size: 30px;
+  margin: 15px 30px 15px 15px;
+  color: #00843d;
+}
+
+.logo:hover {
+  cursor: pointer;
+}

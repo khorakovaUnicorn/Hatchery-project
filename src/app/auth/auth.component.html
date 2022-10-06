@@ -1,0 +1,27 @@
+<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+  <div class="field">
+    <label for="login">Uživatelské jméno:</label>
+    <br>
+    <input
+      ngModel
+      type="text"
+      id="login"
+      name="login"
+    />
+  </div>
+  <div class="field">
+    <label for="password">Heslo:</label>
+    <br>
+    <input
+      ngModel
+      type="password"
+      id="password"
+      name="password"
+    />
+  </div>
+  <button type="submit">Potvrdit</button>
+  <div class="error" *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+</form>
+

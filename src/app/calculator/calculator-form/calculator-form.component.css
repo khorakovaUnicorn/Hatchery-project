@@ -1,0 +1,118 @@
+.main-form {
+  flex-grow: 1;
+  width: 33vw;
+  padding: 3em;
+  border: 1px solid #00843d;
+  margin: 1em;
+}
+
+.main-form-header {
+  color: #00843d;
+}
+
+/*.main-form-checkbox-area {*/
+/*  margin: 20px;*/
+/*}*/
+
+/*.main-form-checkbox {*/
+/*  margin: 5px;*/
+/*}*/
+
+select {
+  margin: 20px;
+  font-size: 18px;
+}
+
+option {
+  font-size: 18px;
+  border: 2px solid black;
+}
+
+select:focus {
+  outline: none;
+}
+
+
+.form-inputs {
+  margin: 20px;
+}
+
+.form-inputs input {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  border: 2px solid black;
+}
+
+.form-inputs input:focus {
+  outline: none;
+  border: 2px solid #00843d;
+}
+
+.tel-input {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.tel-input p {
+  margin: 0;
+}
+
+.loan-form-submit {
+  margin: .8em 20px;
+  width: 30%;
+  font-weight: bold;
+  background: #00843d;
+  border: 1px solid #00843d;
+  color: white;
+  padding: .5em 0;
+  transition-duration: 500ms;
+  font-size: 1em;
+  font-family: 'Poppins', sans-serif;
+}
+
+.loan-form-submit:hover {
+  cursor: pointer;
+  background: white;
+  color: #00843d;
+  transition-duration: 500ms;
+}
+
+.loan-form-submit:disabled {
+  cursor: default;
+  background: rgba(0, 132, 61, 0.71);
+  border: 1px solid rgba(0, 132, 61, 0.71);
+}
+
+.loan-form-submit:disabled:hover {
+  cursor: default;
+  background: rgba(0, 132, 61, 0.71);
+  border: 1px solid rgba(0, 132, 61, 0.71);
+  color: white;
+}
+
+.warning-message {
+  color: red;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.warning-message-input {
+  display: flex;
+  gap: 5px;
+}
+
+.errMess {
+  color: red;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+}
+
+.faultyAddress {
+  color: red !important;
+}
+

@@ -1,0 +1,89 @@
+.request-detail-box {
+  width: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 120px auto;
+}
+
+.request-detail {
+  border: 1px solid #00843d;
+  padding: 40px;
+}
+
+.reqData {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+.reqData h4 {
+  margin: 10px 0;
+}
+
+.reqData p {
+  margin: 10px 0;
+}
+
+.divider {
+  content: '';
+  width: 90%;
+  margin: 0 auto;
+  background: #8A8A8A;
+  height: 1px;
+}
+
+.addressPart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.addressPart p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.addressPart h5 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.addressData {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.addressData h4 {
+  margin-bottom: 0;
+}
+
+.addressHolder {
+  display: flex;
+  flex-direction: column;
+}
+
+.back-button {
+  margin: .8em 20px;
+  width: 30%;
+  font-weight: bold;
+  background: #00843d;
+  border: 1px solid #00843d;
+  color: white;
+  padding: .5em 0;
+  transition-duration: 500ms;
+  font-size: 1em;
+  font-family: 'Poppins', sans-serif;
+}
+
+.back-button:hover {
+  cursor: pointer;
+  background: white;
+  color: #00843d;
+  transition-duration: 500ms;
+}
+
+

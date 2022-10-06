@@ -1,0 +1,81 @@
+.whoIsLoggedPannel {
+  padding: 20px 60px;
+  margin-top: 7em;
+  background-color: #00843d;
+  display: flex;
+  justify-content: right;
+}
+
+.whoIsLogged {
+  color: white;
+  font-size: 18px;
+}
+
+.admin {
+  position: absolute;
+  margin-top: 3em;
+  width: 100%;
+  padding: 40px;
+}
+
+.tableSection {
+  margin: 0 auto;
+  max-width: 60%;
+}
+
+.filters {
+  text-align: center;
+}
+
+.filters th, .filters td {
+  padding: 5px 10px;
+}
+
+select {
+  font-size: 16px;
+}
+
+.table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table th {
+  border: 1px solid black;
+  padding: 10px;
+  background-color: #00843d;
+  color: white;
+}
+
+.table td {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.table button {
+  padding: 5px;
+  margin: 2px;
+  border-radius: 0.2em;
+  border: 1px solid gray;
+}
+
+option {
+  border-width: 1px;
+}
+
+.approve {
+  border-color: #00843d;
+  background-color: #C4f1af;
+}
+
+.reject {
+  border-color: red;
+  background-color: #F5cece;
+}
+
+.error {
+  color: red;
+  margin: 0 auto;
+  text-align: center;
+}

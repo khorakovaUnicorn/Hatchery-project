@@ -1,0 +1,87 @@
+<h2>Souhrn žádosti</h2>
+
+<hr>
+
+<div class="requestSliders">
+  <form>
+    <div class="reqAmDur">
+      <div class="reqText">
+        <h4>Částka:</h4>
+        <p *ngIf="!editMode">{{amount | spacing }} Kč</p>
+      </div>
+      <div class="reqSlide" *ngIf="editMode">
+        <input type="range" min="6000" max="1200000" step="1000" value="{{amount}}" (input)="amtChange($event)">
+        <div class="reqSlideVal">{{amount}} Kč</div>
+      </div>
+    </div>
+    <div class="reqAmDur">
+      <div class="reqText">
+        <h4>Doba splácení:</h4>
+        <p *ngIf="!editMode">{{durationMessage}}</p>
+      </div>
+      <div class="reqSlide" *ngIf="editMode">
+        <input type="range" min="6" max="60" value="{{numOfMonths}}" (input)="durChange($event)">
+        <div class="reqSlideVal">{{durationMessage}}</div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<hr>
+
+<div class="reqPersonal" *ngIf="loanDetail">
+  <div class="reqData">
+    <h3>{{applicantType}}</h3>
+  </div>
+  <div class="reqData" *ngIf="loanDetail.applicantType === 'LEGAL_ENTITY'">
+    <h4>Název firmy:</h4>
+    <p>{{loanDetail.companyName}}</p>
+  </div>
+  <div class="reqData">
+    <h4>Jméno:</h4>
+    <p>{{loanDetail.name}}</p>
+  </div>
+  <div class="reqData">
+    <h4>Příjmení:</h4>
+    <p>{{loanDetail.surname}}</p>
+  </div>
+  <div class="reqData" *ngIf="loanDetail.applicantType === 'INDIVIDUAL'">
+    <h4>Rodné číslo:</h4>
+    <p>{{loanDetail.birthNum}}</p>
+  </div>
+  <div class="reqData" *ngIf="loanDetail.applicantType === 'OSVC' || loanDetail.applicantType === 'LEGAL_ENTITY'">
+    <h4>IČO:</h4>
+    <p>{{loanDetail.IC}}</p>
+  </div>
+  <div class="reqData" *ngIf="loanDetail.applicantType === 'LEGAL_ENTITY'">
+    <h4>Pozice ve firmě:</h4>
+    <p>{{loanDetail.position}}</p>
+  </div>
+  <div class="reqData" *ngIf="loanDetail.applicantType === 'OSVC' || loanDetail.applicantType === 'INDIVIDUAL'">
+    <h4>Státní příslušnost:</h4>
+    <p>{{loanDetail.nationality}}</p>
+  </div>
+  <div class="reqData">
+    <h4>E-mail:</h4>
+    <p>{{loanDetail.email}}</p>
+  </div>
+  <div class="reqData">
+    <h4>Telefonní číslo:</h4>
+    <p>+420 {{loanDetail.phone | spacing}}</p>
+  </div>
+  <div class="addressData">
+    <h4>Adresa</h4>
+    <hr>
+    <div class="addressHolder">
+      <div class="addressPart">
+        <h5>Město: </h5>
+        <p>{{city}}, {{postalCode | postalCode}}</p>
+      </div>
+      <div class="addressPart">
+        <h5>Ulice: </h5>
+        <p>{{street}} {{descNumber}}/{{indicativeNumber}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+

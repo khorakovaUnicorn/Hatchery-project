@@ -1,0 +1,66 @@
+<form [formGroup]="loanFormIndividual" (ngSubmit)="onSubmit()">
+    <div class="form-inputs">
+      <label for="name">Jméno</label>
+      <div class="warning-message-input">
+      <input type="text" id="name" formControlName="name">
+      <span *ngIf="!loanFormIndividual.get('name').valid && loanFormIndividual.get('name').touched">
+      <span class="warning-message" *ngIf="loanFormIndividual.get('name').errors['required']">Vyplňte jméno</span>
+      <span class="warning-message" *ngIf="loanFormIndividual.get('name').errors['pattern']">Jméno nesmí obsahovat číslice.</span>
+      </span></div>
+
+      <label for="surname">Příjmení</label>
+      <div class="warning-message-input">
+      <input type="text" id="surname" formControlName="surname">
+      <span *ngIf="!loanFormIndividual.get('surname').valid && loanFormIndividual.get('name').touched">
+      <span class="warning-message" *ngIf="loanFormIndividual.get('surname').errors['required']">Vyplňte jméno</span>
+      <span class="warning-message" *ngIf="loanFormIndividual.get('surname').errors['pattern']">Jméno nesmí obsahovat číslice.</span>
+      </span></div>
+
+      <label for="birthNum">Rodné číslo</label>
+      <div class="warning-message-input">
+      <input type="text" id="birthNum" formControlName="birthNum">
+      <span class="warning-message" *ngIf="!loanFormIndividual.get('birthNum').valid && loanFormIndividual.get('birthNum').touched">Nesprávný formát</span>
+      </div>
+      <label for="nationality">Státní příslušnost</label>
+      <input type="text" id="nationality" formControlName="nationality">
+
+      <label for="email">E-mail</label>
+      <div class="warning-message-input">
+      <input type="email" id="email" formControlName="email">
+      <span class="warning-message" *ngIf="!loanFormIndividual.get('email').valid && loanFormIndividual.get('email').touched">Nesprávný formát</span>
+      </div>
+
+      <label for="phone">Telefonní číslo</label>
+      <div class="tel-input warning-message-input">
+        <p>+ 420</p>
+      <input type="tel" id="phone" formControlName="phone">
+        <span class="warning-message" *ngIf="!loanFormIndividual.get('phone').valid && loanFormIndividual.get('phone').touched">Nesprávný formát</span>
+      </div>
+
+      <p>Adresa:</p>
+      <div formGroupName="address">
+        <label for="street">Ulice</label>
+        <input type="text" id="street" formControlName="street">
+        <label for="descNumber" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">Číslo popisné</label>
+        <div class="warning-message-input">
+        <input type="text" id="descNumber" (input)="onAddressChange()" formControlName="descNumber" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">
+        <span *ngIf="!loanFormIndividual.get('address.descNumber').valid && loanFormIndividual.get('address.descNumber').touched">
+          <span class="warning-message" *ngIf="loanFormIndividual.get('address.descNumber').errors['pattern']">Vyplňte pouze číslice.</span>
+        </span>
+      </div>
+        <label for="indicativeNumber" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">Číslo orientační</label>
+        <input type="text" id="indicativeNumber" (input)="onAddressChange()" formControlName="indicativeNumber" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">
+        <label for="city">Město</label>
+        <input type="text" id="city" formControlName="city">
+        <label for="postalCode" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">Poštovní směrovací číslo</label>
+        <div class="warning-message-input">
+        <input type="text" id="postalCode" (input)="onAddressChange()" formControlName="postalCode" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">
+      <span *ngIf="!loanFormIndividual.get('address.postalCode').valid && loanFormIndividual.get('address.postalCode').touched">
+      <span class="warning-message" *ngIf="loanFormIndividual.get('address.postalCode').errors['required']">Vyplňte jméno</span>
+          <span class="warning-message" *ngIf="loanFormIndividual.get('address.postalCode').errors['pattern'] && loanFormIndividual.get('address.postalCode').errors['maxLength']">Vyplňte pouze 5 číslic.</span>
+        </span>
+    </div>
+  </div>
+    </div>
+  <button type="submit" class="loan-form-submit" [disabled]="!loanFormIndividual.valid">Odeslat</button>
+</form>

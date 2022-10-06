@@ -1,0 +1,87 @@
+<div class="request-detail-box">
+<div *ngIf="allDetailData" class="request-detail">
+  <h2>Souhrn žádosti</h2>
+
+  <hr>
+
+  <div class="reqPersonal">
+    <div class="reqData">
+      <h4>Částka:</h4>
+      <p>{{allDetailData.amount | spacing }} Kč</p>
+    </div>
+
+  </div>
+  <div class="reqPersonal">
+    <div class="reqData">
+      <h4>Doba splácení:</h4>
+      <p>{{allDetailData.numOfMonths}} Měsíců</p>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="reqPersonal">
+    <div class="reqData">
+      <h3 *ngIf="allDetailData.applicantType === 'INDIVIDUAL'">Fyzická osoba</h3>
+      <h3 *ngIf="allDetailData.applicantType === 'LEGAL_ENTITY'">Právnická osoba</h3>
+      <h3 *ngIf="allDetailData.applicantType === 'OSVC'">OSVČ</h3>
+    </div>
+    <div class="reqData" *ngIf="allDetailData.applicantType === 'LEGAL_ENTITY'">
+      <h4>Název firmy:</h4>
+      <p>{{allDetailData.companyName}}</p>
+    </div>
+    <div class="reqData">
+      <h4>Jméno:</h4>
+      <p>{{allDetailData.name}}</p>
+    </div>
+    <div class="reqData">
+      <h4>Příjmení:</h4>
+      <p>{{allDetailData.surname}}</p>
+    </div>
+    <div class="reqData" *ngIf="allDetailData.applicantType === 'INDIVIDUAL'">
+      <h4>Rodné číslo:</h4>
+      <p>{{allDetailData.birthNum}}</p>
+    </div>
+    <div class="reqData" *ngIf="allDetailData.applicantType === 'OSVC' || allDetailData.applicantType === 'LEGAL_ENTITY'">
+      <h4>IČO:</h4>
+      <p>{{allDetailData.IC}}</p>
+    </div>
+    <div class="reqData" *ngIf="allDetailData.applicantType === 'LEGAL_ENTITY'">
+      <h4>Pozice ve firmě:</h4>
+      <p>{{allDetailData.position}}</p>
+    </div>
+    <div class="reqData" *ngIf="allDetailData.applicantType === 'OSVC' || allDetailData.applicantType === 'INDIVIDUAL'">
+      <h4>Státní příslušnost:</h4>
+      <p>{{allDetailData.nationality}}</p>
+    </div>
+    <div class="reqData">
+      <h4>E-mail:</h4>
+      <p>{{allDetailData.email}}</p>
+    </div>
+    <div class="reqData">
+      <h4>Telefonní číslo:</h4>
+      <p>+420 {{allDetailData.phone | spacing}}</p>
+    </div>
+    <div class="addressData">
+      <h4>Adresa</h4>
+      <hr>
+      <div class="addressHolder">
+        <div class="addressPart">
+          <h5>Město: </h5>
+          <p>{{allDetailData.address.city}}, {{allDetailData.address.postalCode | postalCode}}</p>
+        </div>
+        <div class="addressPart">
+          <h5>Ulice: </h5>
+          <p>{{allDetailData.address.street}} {{allDetailData.address.descNumber}}/{{allDetailData.address.indicativeNumber}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!--</div>-->
+<!--<button class="back-button" (click)="backToAllRequest()">Zpět na přehled žádostí</button>-->
+<!--</div>-->
+
+

@@ -1,0 +1,98 @@
+<form [formGroup]="loanFormLegalEntity" (ngSubmit)="onSubmit()">
+  <div class="form-inputs">
+    <label for="IC">IČO</label>
+    <div class="warning-message-input">
+    <input type="number" id="IC" formControlName="IC">
+    <span class="warning-message"
+          *ngIf="!loanFormLegalEntity.get('IC').valid && loanFormLegalEntity.get('IC').touched">Nesprávný formát</span>
+  </div>
+
+    <label for="companyName">Název firmy</label>
+    <div class="warning-message-input">
+    <input type="text" id="companyName" formControlName="companyName">
+    <span class="warning-message" *ngIf="!loanFormLegalEntity.get('companyName').valid && loanFormLegalEntity.get('companyName').touched">Vyplňte název firmy</span>
+  </div>
+
+    <p>Osoba jednající za firmu:</p>
+    <label for="name">Jméno</label>
+    <div class="warning-message-input">
+      <input type="text" id="name" formControlName="name">
+      <span *ngIf="!loanFormLegalEntity.get('name').valid && loanFormLegalEntity.get('name').touched">
+      <span class="warning-message" *ngIf="loanFormLegalEntity.get('name').errors['required']">Vyplňte jméno</span>
+      <span class="warning-message" *ngIf="loanFormLegalEntity.get('name').errors['pattern']">Jméno nesmí obsahovat číslice.</span>
+      </span></div>
+
+    <label for="surname">Příjmení</label>
+    <div class="warning-message-input">
+      <input type="text" id="surname" formControlName="surname">
+      <span *ngIf="!loanFormLegalEntity.get('surname').valid && loanFormLegalEntity.get('name').touched">
+      <span class="warning-message" *ngIf="loanFormLegalEntity.get('surname').errors['required']">Vyplňte jméno</span>
+      <span class="warning-message" *ngIf="loanFormLegalEntity.get('surname').errors['pattern']">Jméno nesmí obsahovat číslice.</span>
+      </span></div>
+
+    <div>
+      <label for="position">Pozice ve firmě</label>
+      <select id="position" formControlName="position" class="main-form-select">
+        <option>Člen/ka představenstva</option>
+        <option>Člen/ka správní rady</option>
+        <option>Člen/ka výboru</option>
+        <option>Ekonom/ka</option>
+        <option>Generálné ředitel/ka</option>
+        <option>Jednatel/ka</option>
+        <option>Místopředseda/Místopředsedkyně</option>
+        <option>Místostarosta/Místostarostka</option>
+        <option>Předseda/Předsedkyně</option>
+        <option>Předseda představenstva</option>
+        <option>Předseda správní rady</option>
+        <option>Primátor/ka</option>
+        <option>Prokurista/ka</option>
+        <option>Ředitel/ka</option>
+        <option>Společník</option>
+        <option>Starosta/ka</option>
+        <option>Účetní</option>
+        <option>Zástupce</option>
+        <option>Zplnomocněný</option>
+      </select>
+    </div>
+
+
+    <label for="email">E-mail</label>
+    <div class="warning-message-input">
+      <input type="email" id="email" formControlName="email">
+      <span class="warning-message"
+            *ngIf="!loanFormLegalEntity.get('email').valid && loanFormLegalEntity.get('email').touched">Nesprávný formát</span>
+    </div>
+
+    <label for="phone">Telefonní číslo</label>
+    <div class="tel-input">
+      <p>+ 420</p>
+      <input type="tel" id="phone" formControlName="phone">
+    </div>
+
+    <p>Adresa:</p>
+    <div formGroupName="address">
+      <label for="street">Ulice</label>
+      <input type="text" id="street" formControlName="street">
+      <label for="descNumber" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">Číslo popisné</label>
+      <div class="warning-message-input">
+        <input type="text" id="descNumber" (input)="onAddressChange()" formControlName="descNumber" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">
+        <span *ngIf="!loanFormLegalEntity.get('address.descNumber').valid && loanFormLegalEntity.get('address.descNumber').touched">
+          <span class="warning-message" *ngIf="loanFormLegalEntity.get('address.descNumber').errors['pattern']">Vyplňte pouze číslice.</span>
+        </span>
+      </div>
+      <label for="indicativeNumber" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">Číslo orientační</label>
+      <input type="number" id="indicativeNumber" (input)="onAddressChange()" formControlName="indicativeNumber" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">
+      <label for="city">Město</label>
+      <input type="text" id="city" formControlName="city">
+      <label for="postalCode" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">Poštovní směrovací číslo</label>
+      <div class="warning-message-input">
+        <input type="text" id="postalCode" (input)="onAddressChange()" formControlName="postalCode" [ngClass]="errAddress ? 'faultyAddress' : 'normal'">
+        <span *ngIf="!loanFormLegalEntity.get('address.postalCode').valid && loanFormLegalEntity.get('address.postalCode').touched">
+      <span class="warning-message" *ngIf="loanFormLegalEntity.get('address.postalCode').errors['required']">Vyplňte jméno</span>
+          <span class="warning-message" *ngIf="loanFormLegalEntity.get('address.postalCode').errors['pattern'] && loanFormLegalEntity.get('address.postalCode').errors['maxLength']">Vyplňte pouze 5 číslic.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="loan-form-submit" [disabled]="!loanFormLegalEntity.valid">Odeslat</button>
+</form>

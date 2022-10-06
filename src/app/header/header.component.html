@@ -1,0 +1,23 @@
+<nav>
+  <span class="logo">CoopBank</span>
+  <span class="nav_left">
+    <a class="nav" routerLink="/calc">Kalkulačka</a>
+    <a class="nav">Půjčka</a>
+    <a class="nav">O společnosti</a>
+    <a class="nav">Kontakt</a>
+    </span>
+  <span class="nav_right">
+      <a class="nav" id="admin" routerLink="/admin/allRequest"
+         *ngIf="loggedUser && (loggedUser.roles.includes('ADMIN') || loggedUser.roles.includes('SUPERVIZOR'))">
+        Žádosti
+      </a>
+    <!--TODO: Change button to logout after logging in-->
+      <a class="nav" id="login" routerLink="/auth" *ngIf="!loggedUser">
+        Přihlášení
+      </a>
+      <a class="nav" id="logout" routerLink="/auth" *ngIf="loggedUser" (click)="onLogout()">
+        Odhlášení
+      </a>
+  </span>
+</nav>
+
