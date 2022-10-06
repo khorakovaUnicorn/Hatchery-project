@@ -1,6 +1,5 @@
 .whoIsLoggedPannel {
   padding: 20px 60px;
-  margin-top: 7em;
   background-color: #00843d;
   display: flex;
   justify-content: right;
@@ -12,15 +11,18 @@
 }
 
 .admin {
-  position: absolute;
-  margin-top: 3em;
-  width: 100%;
-  padding: 40px;
+  margin: 10px;
 }
 
 .tableSection {
-  margin: 0 auto;
-  max-width: 60%;
+  margin: 0 20px
+}
+
+@media screen and (min-width: 900px) {
+  .tableSection {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 }
 
 .filters {
