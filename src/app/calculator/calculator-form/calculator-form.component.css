@@ -114,3 +114,9 @@ input.ng-invalid.ng-touched {
   color: red !important;
 }
 
+.radioLabel {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin: 10px;
+}
