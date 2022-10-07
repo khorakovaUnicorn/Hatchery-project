@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {oneRequest} from "./requests.model";
 import {LoanRequest} from "../../calculator/calculator-form/loan-request.model";
+import {catchError, empty, Observable, Subject} from "rxjs";
 
 export interface SingleRequest {
   position: string;
@@ -20,18 +21,33 @@ export type AdminResponseData = SingleRequest[];
 
 @Injectable({providedIn: 'root'})
 export class AdminService {
+  errorSubject = new Subject<string>()
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, ) {
   }
 
-   getAllRequests(token: string) {
+   getAllRequests(token: string): Observable<AdminResponseData> {
     return this.http
       .get<AdminResponseData>(
         'http://localhost:8000/request/list',
         {headers: new HttpHeaders({Authorization: "Bearer " + token})},
       )
+      .pipe(
+        catchError(error => {
+          if (error.error.error === "unknown user token") {
+            this.errorSubject.next("Přístup zamítnut, nesprávná autorizace")
+            return empty()
+          } else {
+            this.errorSubject.next("Nelze se připojit k serveru")
+            return empty()
+          }
+        })
+      )
   }
 
+  getError(): Observable<string> {
+    return this.errorSubject.asObservable()
+  }
 
 
   requestApprove(request: oneRequest, token: string) {
