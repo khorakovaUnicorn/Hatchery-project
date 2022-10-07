@@ -1,4 +1,6 @@
-export class oneRequest {
+import {BaseRequest} from "../../calculator/calculator-form/loan-request.model";
+
+export class oneRequest implements BaseRequest{
   constructor(
     public position: string,
     public amount: number,

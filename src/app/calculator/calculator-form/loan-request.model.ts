@@ -1,4 +1,9 @@
-export class LoanRequest {
+export interface BaseRequest {
+  id?: string;
+  status?: string;
+}
+
+export class LoanRequest implements BaseRequest{
   applicantType: string;
   name: string;
   surname: string;

@@ -39,8 +39,8 @@
   </div>
   <br>
 
-  <div class="error" *ngIf="error">
-    <p>{{ error }}</p>
+  <div class="error">
+    <p>{{ errorObservable | async }}</p>
   </div>
 
   <div class="tableSection">
@@ -58,9 +58,9 @@
           <option value="min">MIN</option>
         </select></th>
         <th>Stav žádosti</th>
-        <th *ngIf="displayedRequests === undefined || displayedRequests[0]"></th>
+        <th></th>
       </tr>
-      <tr *ngFor="let request of displayedRequests">
+      <tr *ngFor="let request of displayedRequestsObservable | async">
         <td *ngIf="request.applicantType === 'INDIVIDUAL'">Fyzická</td>
         <td *ngIf="request.applicantType === 'OSVC'">OSVČ</td>
         <td *ngIf="request.applicantType === 'LEGAL_ENTITY'">Právnická</td>
@@ -76,7 +76,7 @@
         </td>
       </tr>
     </table>
-    <p *ngIf="displayedRequests === undefined || !displayedRequests[0]">Žádná data k zobrazení</p>
+    <p *ngIf="!((displayedRequestsObservable | async)?.length)">Žádná data k zobrazení</p>
   </div>
 </div>
 

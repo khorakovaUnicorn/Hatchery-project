@@ -1,9 +1,7 @@
 .main-form {
-  flex-grow: 1;
-  width: 33vw;
   padding: 3em;
   border: 1px solid #00843d;
-  margin: 1em;
+  margin: 10px;
 }
 
 .main-form-header {
@@ -116,3 +114,9 @@ input.ng-invalid.ng-touched {
   color: red !important;
 }
 
+.radioLabel {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin: 10px;
+}
