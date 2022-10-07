@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {map, Observable, Subscription, tap} from "rxjs";
 
 import {AuthService} from "../../auth/auth.service";
 import {User} from "../../auth/user.model";
@@ -46,88 +46,79 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   onApprove(request: oneRequest) {
-  //   this.error = null;
-  //   this.requestApproveSub = this.adminService.requestApprove(request, this.loggedUser.token)
-  //     .subscribe((resData) => {
-  //         request.status = resData.status;
-  //       },
-  //       error => {
-  //         if (error.error.error === "unknown user token") {
-  //           this.error = "Přístup zamítnut, nesprávná autorizace"
-  //         } else {
-  //           this.error = "Nelze se připojit k serveru"
-  //         }
-  //       }
-  //     )
+    this.adminService.requestApprove(request, this.loggedUser.token)
   }
 
   onReject(request: oneRequest) {
-  //   this.error = null;
-  //   this.requestRejectSub = this.adminService.requestReject(request, this.loggedUser.token)
-  //     .subscribe((resData) => {
-  //         request.status = resData.status;
-  //       },
-  //       error => {
-  //         if (error.error.error === "unknown user token") {
-  //           this.error = "Přístup zamítnut, nesprávná autorizace"
-  //         } else {
-  //           this.error = "Nelze se připojit k serveru"
-  //         }
-  //       }
-  //     )
+    this.adminService.requestReject(request, this.loggedUser.token)
   }
 
   onFiltering() {
-    // let filteredBySubject = this.adminService.displayFilteredSubject(this.allRequests, this.subjectSelection);
-    // let filteredByState = this.adminService.displayFilteredState(this.allRequests, this.stateSelection);
-    // this.displayedRequests = this.adminService.filterFinal(filteredBySubject, filteredByState);
-    // if (this.sortedLoan) {
-    //   this.onLoanSorting(this.sortedLoan);
-    // } else if (this.sortedAlphabet) {
-    //   this.onAlphabetSorting(this.sortedAlphabet);
-    // }
+    this.displayedRequestsObservable = this.displayedRequestsObservable
+      .pipe(
+        map(requests =>
+          this.adminService.displayFilteredSubject(requests, this.subjectSelection)
+        ),
+        map(requests =>
+          this.adminService.displayFilteredState(requests, this.stateSelection)
+        )
+      )
   }
 
   onAlphabetSorting(event) {
-    // if (event === "AZ") {
-    //   this.displayedRequests = this.displayedRequests.sort(
-    //     (a, b) => (a.surname > b.surname) ? 1 : ((b.surname > a.surname) ? -1 : 0)
-    //   )
-    // } else if (event === "ZA") {
-    //   this.displayedRequests = this.displayedRequests.sort(
-    //     (a, b) => (a.surname < b.surname) ? 1 : ((b.surname < a.surname) ? -1 : 0)
-    //   )
-    // }
-    // this.sortedLoan = '';
+    if (event === "AZ") {
+      this.displayedRequestsObservable = this.displayedRequestsObservable
+        .pipe(
+          map(result => {
+            return result.sort((a, b) => (a.surname > b.surname) ? 1 : ((b.surname > a.surname) ? -1 : 0))
+          })
+        );
+    } else if (event === "ZA") {
+      this.displayedRequestsObservable = this.displayedRequestsObservable
+        .pipe(
+          map(
+            result => {
+              return result.sort((a, b) => (a.surname < b.surname) ? 1 : ((b.surname < a.surname) ? -1 : 0))
+            })
+        );
+    }
   }
 
   onLoanSorting(event) {
-  //   if (event === "min") {
-  //     this.displayedRequests = this.displayedRequests.sort(
-  //       (a, b) => (a.amount > b.amount) ? 1 : ((b.amount > a.amount) ? -1 : 0)
-  //     )
-  //   } else if (event === "max") {
-  //     this.displayedRequests = this.displayedRequests.sort(
-  //       (a, b) => (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0)
-  //     )
-  //   }
-  //   this.sortedAlphabet = '';
+      if (event === "min") {
+        this.displayedRequestsObservable = this.displayedRequestsObservable
+          .pipe(
+            map(
+              result => {
+                return result.sort((a, b) => (a.amount > b.amount) ? 1 : ((b.amount > a.amount) ? -1 : 0))
+              }
+            )
+          )
+      } else if (event === "max") {
+        this.displayedRequestsObservable = this.displayedRequestsObservable
+          .pipe(
+            map(
+              result => {
+                return result.sort((a, b) => (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0))
+              }
+            )
+          )
+      }
   }
 
   openDetail(requestId: string) {
-  //   const url = this.router.serializeUrl(
-  //     this.router.createUrlTree([`../detail/${requestId}`], {relativeTo: this.route})
-  //   );
-  //
-  //   window.open(url, '_blank');
+      const url = this.router.serializeUrl(
+        this.router.createUrlTree([`../detail/${requestId}`], {relativeTo: this.route})
+      );
+      window.open(url, '_blank');
   }
 
 
   ngOnDestroy() {
-  //   this.requestListSub.unsubscribe();
-  //   this.userSub.unsubscribe();
-  //   if (this.requestRejectSub) {this.requestRejectSub.unsubscribe()}
-  //   if (this.requestApproveSub) {this.requestApproveSub.unsubscribe()}
+    //   this.requestListSub.unsubscribe();
+    //   this.userSub.unsubscribe();
+    //   if (this.requestRejectSub) {this.requestRejectSub.unsubscribe()}
+    //   if (this.requestApproveSub) {this.requestApproveSub.unsubscribe()}
   }
 
 }

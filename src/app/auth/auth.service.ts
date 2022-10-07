@@ -15,7 +15,6 @@ export interface AuthResponseData {
 export class AuthService {
   user = new BehaviorSubject<User>(null);
 
-
   constructor(private http: HttpClient) {
    let localStorageUser = localStorage.getItem('user')
     if (localStorageUser !==null) {
